@@ -90,7 +90,7 @@ def home():
         user2.num_of_games +=1
         db.session.commit()
     else:
-        new_user = gameStats(name=winner, num_of_games=1, num_of_wins=0)
+        new_user = gameStats(name=loser, num_of_games=1, num_of_wins=0)
         db.session.add(new_user)
         db.session.commit()
 

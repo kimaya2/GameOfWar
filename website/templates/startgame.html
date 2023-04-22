@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Start a Game</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+		}
+		.btn {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin: 10px;
+		}
+		.btn:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<h1>Start a Game</h1>
+	<div class="container">
+		<p>Game of War is a strategy game played with a standard deck of cards. The objective is to capture all the cards in the deck by winning battles against your opponent.</p>
+        <br>
+		{% for message in messages %}
+		{% if "Round" in message %}
+		<p><b>{{ message }}</b></p>
+		{% else %}
+		<ul>
+			<li>{{ message }}</li>
+		</ul>
+		{% endif %}
+		{% endfor %}
+		<br>
+        <p><b>Winner is: {{winner}}</b></p>
+		<a href="/" class="btn">Back to Home</a>
+	</div>
+</body>
+</html>

@@ -9,7 +9,7 @@ views = Blueprint('views',__name__)
 def home():
     return render_template('base.html')
 
-@views.route('/playerstats',methods=['GET'])
+@views.route('/playerstats')
 def view_playerstats():
     user1 = gameStats.query.filter_by(name='Player 1').first()
     user2 = gameStats.query.filter_by(name='Player 2').first()

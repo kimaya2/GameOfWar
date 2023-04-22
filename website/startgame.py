@@ -7,7 +7,7 @@ from .models import gameStats
 
 game = Blueprint('game',__name__)
 
-@game.route('/startgame',methods =['GET','POST'])
+@game.route('/startgame')
 def home():
     display_messages = []
     # Define the deck of cards

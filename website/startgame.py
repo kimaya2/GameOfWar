@@ -11,9 +11,9 @@ game = Blueprint('game',__name__)
 def home():
     display_messages = []
     # Define the deck of cards
-    suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
-    ranks = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
-    deck = [(rank, suit) for suit in suits for rank in ranks]
+    shapes = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+    cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King','Ace']
+    deck = [(card, shape) for shape in shapes for card in cards]
 
     # Shuffle the deck
     random.shuffle(deck)
@@ -24,36 +24,69 @@ def home():
 
     # Define a function to play a round of War
     def play_round(player1, player2):
-        card1 = player1.pop(0)
-        card2 = player2.pop(0)
-        display_messages.append(f'Player 1 plays {card1[0]} of {card1[1]}')
-        display_messages.append(f'Player 2 plays {card2[0]} of {card2[1]}')
-        if ranks.index(card1[0]) > ranks.index(card2[0]):
+        player1_card = player1.pop(0)
+        player2_card = player2.pop(0)
+        display_messages.append(f'Player 1 plays {player1_card[0]} of {player1_card[1]}')
+        display_messages.append(f'Player 2 plays {player2_card[0]} of {player2_card[1]}')
+
+        if cards.index(player1_card[0]) > cards.index(player2_card[0]):
             display_messages.append('Player 1 wins the round!')
-            player1.append(card1)
-            player1.append(card2)
-        elif ranks.index(card2[0]) > ranks.index(card1[0]):
+            player1.append(player1_card)
+            player1.append(player2_card)
+
+        elif cards.index(player2_card[0]) > cards.index(player1_card[0]):
             display_messages.append('Player 2 wins the round!')
-            player2.append(card2)
-            player2.append(card1)
+            player2.append(player2_card)
+            player2.append(player1_card)
+
         else:
-            display_messages.append('Tie!')
-            war_cards = [card1, card2]
+            display_messages.append('War!')
+            war_cards = [player1_card, player2_card]
+            
             while True:
-                if len(player1) < 4:
+                if len(player1) < 2:
                     display_messages.append('Player 2 wins the war!')
                     player2.extend(war_cards + player1)
                     break
-                elif len(player2) < 4:
+                elif len(player2) < 2:
                     display_messages.append('Player 1 wins the war!')
                     player1.extend(war_cards + player2)
                     break
                 else:
-                    display_messages.append('War!')
-                    war_cards.extend(player1[:4])
-                    war_cards.extend(player2[:4])
-                    del player1[:4]
-                    del player2[:4]
+                    player1_facedown = player1.pop(0)
+                    player2_facedown = player2.pop(0)
+                    player1_faceup = player1.pop(0)
+                    player2_faceup = player2.pop(0)
+                    
+                    display_messages.append(f'Player 1 war card is {player1_faceup[0]} of {player1_faceup[1]}')
+                    display_messages.append(f'Player 2 war card is {player2_faceup[0]} of {player2_faceup[1]}')
+
+                    print(f'Player 1 war card is {player1_faceup[0]} of {player1_faceup[1]}')
+                    print(f'Player 2 war card is {player2_faceup[0]} of {player2_faceup[1]}')
+                    
+                    if cards.index(player1_faceup[0]) > cards.index(player2_faceup[0]):
+                        display_messages.append('Player 1 wins the round!')
+                        player1.extend(war_cards)
+                        player1.append(player1_faceup)
+                        player1.append(player2_faceup)
+                        player1.append(player1_facedown)
+                        player1.append(player2_facedown)
+                        break
+                    
+                    elif cards.index(player2_faceup[0]) > cards.index(player1_faceup[0]):
+                        display_messages.append('Player 2 wins the round!')
+                        player2.extend(war_cards)
+                        player2.append(player2_faceup)
+                        player2.append(player1_faceup)
+                        player2.append(player2_facedown)
+                        player2.append(player1_facedown)
+                        break
+                    
+                    else:
+                        war_cards.append(player1_facedown)
+                        war_cards.append(player2_facedown)
+                        war_cards.append(player1_faceup)
+                        war_cards.append(player2_faceup)
 
     # Play the game
     round_num = 1
@@ -67,12 +100,11 @@ def home():
         display_messages.append('Player 1 wins the game!')
         winner = 'Player 1'
         loser = 'Player 2'
+
     elif len(half2) > len(half1):
         display_messages.append('Player 2 wins the game!')
         winner = 'Player 2' 
         loser = 'Player 1'       
-    else:
-        display_messages.append('The game ends in a tie!')
 
     user1 = gameStats.query.filter_by(name=winner).first()
 

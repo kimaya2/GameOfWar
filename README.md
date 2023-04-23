@@ -21,3 +21,7 @@ Install the dependencies by running `pip install -r requirements.txt`.
 ## Improvements
 1. Take the player names as user input.
 2. Simulate the game using card images.
+
+## References
+1. https://github.com/techwithtim/Flask-Web-App-Tutorial
+2. https://bicyclecards.com/how-to-play/war/

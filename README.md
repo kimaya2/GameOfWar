@@ -10,7 +10,6 @@ Install the dependencies by running `pip install -r requirements.txt`.
 1. Run the web application by running `python main.py`.
 2. Access the web application by navigating to `http://localhost:5000` in your web browser.
 3. When you're finished, stop the web application by pressing `CTRL+C` in the terminal window.
-4. Deactivate the virtual environment by running `deactivate`.
 
 ## Usage
 

@@ -1,4 +1,4 @@
-## GameOfWar
+## Game Of War
 Python web application that simulates the card game of war
 
 

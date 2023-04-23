@@ -17,3 +17,7 @@ Install the dependencies by running `pip install -r requirements.txt`.
 2. The screen will display two options: Start a Game and View Wins
 3. Start a Game will display a simulated game of war between two players
 4. View Wins will display number of games won by each player
+
+## Improvements
+1. Take the player names as user input.
+2. Simulate the game using card images.

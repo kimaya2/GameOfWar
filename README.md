@@ -5,7 +5,7 @@ Python web application that simulates the card game of war
 ## Installation
 Install the dependencies by running `pip install -r requirements.txt`.
 
-##How to run
+## How to run
 
 1. Run the web application by running `python main.py`.
 2. Access the web application by navigating to `http://localhost:5000` in your web browser.
